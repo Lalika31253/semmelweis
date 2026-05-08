@@ -5,6 +5,15 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = 'django-insecure-your-secret-key-here'
+
+DEBUG = True
+
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+
+ROOT_URLCONF = 'semmelweis_project.urls'
+WSGI_APPLICATION = 'semmelweis_project.wsgi.application'
+
 # ── Installed apps ────────────────────────────────────────────────────────────
 # Add 'analysis' so Django discovers models, admin, and static files inside it.
 INSTALLED_APPS = [
@@ -16,6 +25,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'analysis',   # ← register the analysis app
 ]
+
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
 
 # ── Templates ─────────────────────────────────────────────────────────────────
 # DIRS tells Django to look in the project-level templates/ folder first.
@@ -35,6 +55,14 @@ TEMPLATES = [
         },
     },
 ]
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
 
 # ── Static files ──────────────────────────────────────────────────────────────
 # STATIC_URL is the URL prefix for serving static files.
